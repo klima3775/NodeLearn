@@ -9,7 +9,9 @@ const upperCaseStream = new Transform({
 
 const reverseStream = new Transform({
   transform: function (chunk, encoding, cb) {
-    const reversed = chunk.toString().split("").reverse().join("");
+    const arrayOfChars = chunk.toString().split("");
+    const lastChar = arrayOfChars.pop(); // Remove newline character
+    const reversed = arrayOfChars.reverse().concat(lastChar).join("");
     cb(null, reversed);
   },
 });
